@@ -2,27 +2,16 @@ import React from "react";
 import { Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import profile from "../Assets/userpage/p1.svg";
 import m0 from "../Assets/userpage/m0.svg";
+import ProfileHeader from "./ProfileHeader";
 
 const MargetPhelps = () => {
   return (
     <Box w="full" p={5}>
-      <Flex alignItems="center" mb={4}>
-        <Image
-          src={profile}
-          alt="Profile"
-          borderRadius="full"
-          boxSize="60px"
-          mr={4}
-        />
-        <VStack align="start" gap={1}>
-          <Text fontSize="lg" fontWeight="bold">
-            Margaret Phelps
-          </Text>
-          <Text fontSize="sm" color="gray.500">
-            235K Subscribed
-          </Text>
-        </VStack>
-      </Flex>
+      <ProfileHeader
+        profileImage={profile}
+        title="Margaret Phelps"
+        subtitle="235K Subscribed"
+      />
 
       <Flex alignItems="flex-start" gap={4}>
         <Image

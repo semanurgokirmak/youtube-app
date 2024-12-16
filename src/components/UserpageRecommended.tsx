@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, VStack, Button } from "@chakra-ui/react";
 import flora from "../Assets/userpage/p2.svg";
 import violet from "../Assets/userpage/p3.svg";
 import phillip from "../Assets/userpage/p4.svg";
+import bell from "../Assets/userpage/bell.svg";
 
 const UserpageRecommended = () => {
   const recommendedChannels = [
@@ -22,7 +23,14 @@ const UserpageRecommended = () => {
 
   return (
     <Box>
-      <Text fontSize="lg" fontWeight="bold" mb={4}>
+      <Flex align="center" gap={2} mb={"20px"} ml={"100px"}>
+        <Image src={bell} alt="bell" boxSize="20px" />
+        <Button bg="red" size="sm" borderRadius={"full"}>
+          Subscribe 2.3M
+        </Button>
+      </Flex>
+
+      <Text fontSize="sm" mb={4} color={"gray.400"}>
         Recommended Channels
       </Text>
       <VStack align="start" gap={4}>

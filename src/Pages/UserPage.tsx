@@ -15,17 +15,10 @@ const UserPage = () => {
         height={"280px"}
         objectFit="contain"
         position="relative"
-        top={0}
-        left={0}
         zIndex={-1}
       />
 
-      <Flex
-        justifyContent="space-between"
-        alignItems="flex-start"
-        p={5}
-        gap={8}
-      >
+      <Flex justifyContent="space-between" alignItems="flex-start" gap={8}>
         <Box flex="3">
           <MargetPhelps />
         </Box>
@@ -35,7 +28,7 @@ const UserPage = () => {
         </Box>
       </Flex>
 
-      <Box mt={8}>
+      <Box>
         <MargaretPhelpsVideos />
       </Box>
     </div>

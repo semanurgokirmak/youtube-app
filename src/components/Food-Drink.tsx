@@ -1,3 +1,6 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation } from "swiper/modules";
 import f1 from "../Assets/f1.svg";
 import f2 from "../Assets/f2.svg";
 import f3 from "../Assets/f3.svg";
@@ -5,10 +8,10 @@ import f4 from "../Assets/f4.svg";
 import f5 from "../Assets/f5.svg";
 import f6 from "../Assets/f6.svg";
 import fprofile from "../Assets/fprofil.svg";
-import { Box, HStack, VStack, Image, Text, Stack } from "@chakra-ui/react";
-import LeftButton from "../Assets/Left.svg";
-import RightButton from "../Assets/Right.svg";
+import { Box, Stack } from "@chakra-ui/react";
 import useFoodDrinkStore from "../store/Food-Drink";
+import ProfileHeader from "./ProfileHeader";
+import VideoCard from "./VideoCard";
 
 export default function FoodAndDrink() {
   const videoTitles = [
@@ -48,50 +51,26 @@ export default function FoodAndDrink() {
   return (
     <Box w="full" p={5} height={"280px"} mb={"30px"}>
       <Stack direction="row" w="full" justify="space-between" align="center">
-        <HStack mb={4} gap={4}>
-          <Image
-            src={fprofile}
-            alt="Food & Drink"
-            borderRadius="full"
-            boxSize="50px"
-          />
-          <Text fontSize="lg" fontWeight="bold">
-            Foof & Drink
-          </Text>
-        </HStack>
-
-        <Stack direction="row" gap="10px" mr="50px">
-          <button onClick={prev}>
-            <Image src={LeftButton} alt="Left Button" boxSize="24px" />
-          </button>
-          <button onClick={next}>
-            <Image src={RightButton} alt="Right Button" boxSize="24px" />
-          </button>
-        </Stack>
+        <ProfileHeader profileImage={fprofile} title="Food & Drink" />
       </Stack>
 
       <Box w="full">
-        <HStack gap={5}>
-          {videoImages
-            .slice(currentIndex, currentIndex + 5)
-            .map((image, index) => {
-              const actualIndex = currentIndex + index;
-              return (
-                <VStack key={index} w="400px" align="start" gap={2}>
-                  <Image
-                    src={image}
-                    borderRadius="2xl"
-                    width={"250px"}
-                    height={"150px"}
-                  />
-                  <Text fontSize={"16px"}>{videoTitles[actualIndex]}</Text>
-                  <Text fontSize="13px" color="gray.500">
-                    {videoDateAndView[actualIndex]}
-                  </Text>
-                </VStack>
-              );
-            })}
-        </HStack>
+        <Swiper
+          navigation={true}
+          modules={[Navigation]}
+          spaceBetween={20}
+          slidesPerView={5}
+        >
+          {videoImages.map((image, index) => (
+            <SwiperSlide key={index}>
+              <VideoCard
+                image={image}
+                title={videoTitles[index]}
+                viewsDate={videoDateAndView[index]}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </Box>
     </Box>
   );

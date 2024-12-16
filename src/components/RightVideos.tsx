@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Image, Text, VStack } from "@chakra-ui/react";
 import f1 from "../Assets/videopage/1.svg";
 import f2 from "../Assets/videopage/2.svg";
 import f3 from "../Assets/videopage/3.svg";
@@ -45,18 +45,16 @@ export default function RightVideos() {
   const videoImages = [f1, f2, f3, f4, f5, f6, f7, f8, f9, f10];
 
   return (
-    <Box w={"350px"} p={5} position="absolute" top="0" right="0" bg={"pink"}>
+    <Box w={"350px"} p={5} position="absolute" top="0" right="0">
       <VStack
         direction="column"
         w="full"
         justify="space-between"
         align="center"
       >
-        <VStack mb={4} gap={4}>
-          <Text fontSize="lg" fontWeight="bold">
-            Dollie Blair
-          </Text>
-        </VStack>
+        <Text fontSize="lg" fontWeight="bold">
+          Next
+        </Text>
       </VStack>
 
       <Box w="full">
@@ -72,7 +70,6 @@ export default function RightVideos() {
                     height="170px"
                   />
                   <Text
-                    position="absolute"
                     bottom="5px"
                     right="10px"
                     bg="rgba(0, 0, 0, 0.2)"

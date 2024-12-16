@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Navbar from "./Navbar";
 import SideBar from "./SideBar";
 import { Box } from "@chakra-ui/react";
@@ -11,13 +10,14 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const { isSidebarOpen } = useSidebarStore();
+
   const location = useLocation();
-  const isVideoPage = location.pathname === "/video";
+  const isVideoPage = location.pathname.includes("video");
   return (
     <div>
       <Navbar />
-      {!isVideoPage && <SideBar />}
-      <Box ml={"255px"} mt={"60px"}>
+      <SideBar />
+      <Box ml={isSidebarOpen ? "100px" : "200px"} mt={"60px"}>
         {children}
       </Box>
     </div>

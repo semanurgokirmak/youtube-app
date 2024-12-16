@@ -9,7 +9,7 @@ const SidebarLink = ({ iconSrc, url, urlText, isOpen }: SidebarLinkProps) => {
   return (
     <Stack
       direction={isOpen ? "column" : "row"}
-      gap="4px"
+      gap="2px"
       alignItems={"center"}
     >
       <Image

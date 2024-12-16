@@ -11,7 +11,7 @@ import uiIcon10 from "../Assets/tech-02.svg";
 import uiIcon11 from "../Assets/chevron-down.svg";
 import { ISidebarLinks } from "@/interfaces/ISidebar";
 
-export const sidebarLinks: Array<ISidebarLinks> = [
+export const primaryLinks: Array<ISidebarLinks> = [
   {
     url: "/",
     urlText: "Home",
@@ -27,17 +27,14 @@ export const sidebarLinks: Array<ISidebarLinks> = [
     urlText: "Subscriptions",
     iconSrc: uiIcon3,
   },
+];
+
+export const secondaryLinks: Array<ISidebarLinks> = [
   {
-    url: "#",
-    urlText: "",
-    iconSrc: "",
-  },
-  {
-    url: "#",
+    url: "/deneme",
     urlText: "Library",
     iconSrc: uiIcon4,
   },
-
   {
     url: "#",
     urlText: "History",

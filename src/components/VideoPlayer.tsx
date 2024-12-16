@@ -8,13 +8,7 @@ import share from "../Assets/videopage/Share.svg";
 
 const VideoPlayer = () => {
   return (
-    <Box
-      position="absolute"
-      mt={"10px"}
-      bg={"purple.300"}
-      justifyContent="flex-start"
-      left={"100px"}
-    >
+    <Box mt={"10px"} justifyContent="flex-start" left={"100px"}>
       <Box width="900px" height="506px" borderRadius="2xl" overflow="hidden">
         <ReactPlayer
           url="https://www.youtube.com/watch?v=LXb3EKWsInQ"

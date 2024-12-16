@@ -5,12 +5,11 @@ import profil from "../Assets/videopage/Oval.svg";
 const VideoDetails = () => {
   return (
     <Box
-      mt={"150px"}
+      mt={"10px"}
       width="900px"
       bg="white"
       borderRadius="md"
       p={4}
-      boxShadow="md"
       left={"60px"}
     >
       <HStack align="flex-start" gap={4}>
@@ -25,7 +24,7 @@ const VideoDetails = () => {
           </Text>
         </VStack>
 
-        <Button colorScheme="red" size="sm" ml="auto">
+        <Button bg="red" size="sm" ml="auto" borderRadius={"full"}>
           Subscribe 2.3m
         </Button>
       </HStack>
