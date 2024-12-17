@@ -1,12 +1,15 @@
 import React from "react";
 import { Box, Text, HStack, Image, VStack, Button } from "@chakra-ui/react";
 import profil from "../Assets/videopage/Oval.svg";
+import useSidebarStore from "../store/SidebarStore";
 
 const VideoDetails = () => {
+  const { isSidebarOpen } = useSidebarStore();
+
   return (
     <Box
       mt={"10px"}
-      width="900px"
+      width={isSidebarOpen ? "1000px" : "900px"}
       bg="white"
       borderRadius="md"
       p={4}
@@ -40,4 +43,5 @@ const VideoDetails = () => {
     </Box>
   );
 };
+
 export default VideoDetails;

@@ -5,11 +5,18 @@ import more from "../Assets/videopage/More.svg";
 import like from "../Assets/videopage/Like.svg";
 import dislike from "../Assets/videopage/Dislike.svg";
 import share from "../Assets/videopage/Share.svg";
+import useSidebarStore from "../store/SidebarStore";
 
 const VideoPlayer = () => {
+  const { isSidebarOpen } = useSidebarStore();
   return (
-    <Box mt={"10px"} justifyContent="flex-start" left={"100px"}>
-      <Box width="900px" height="506px" borderRadius="2xl" overflow="hidden">
+    <Box mt={"48px"} justifyContent="flex-start" left={"100px"}>
+      <Box
+        width={isSidebarOpen ? "1000px" : "900px"}
+        height={isSidebarOpen ? "562px" : "506px"}
+        borderRadius="2xl"
+        overflow="hidden"
+      >
         <ReactPlayer
           url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
           controls={true}
@@ -18,7 +25,11 @@ const VideoPlayer = () => {
         />
       </Box>
 
-      <HStack justify="space-between" mt={4} width="900px">
+      <HStack
+        justify="space-between"
+        mt={4}
+        width={isSidebarOpen ? "1000px" : "900px"}
+      >
         <Box>
           <Text fontSize="2xl" fontWeight="bold">
             Dude You Are Getting A Telescope

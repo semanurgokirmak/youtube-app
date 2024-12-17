@@ -12,14 +12,14 @@ export default function ProfileHeader({
   subtitle,
 }: ProfileHeaderProps) {
   return (
-    <HStack mb={4} gap={4}>
+    <HStack mb={2} gap={4} mt={2}>
       <Image
         src={profileImage}
         alt={title}
         borderRadius="full"
         boxSize="50px"
       />
-      <VStack align="start" gap={0}>
+      <VStack align="start" gap={5}>
         <Text fontSize="lg" fontWeight="bold">
           {title}
         </Text>

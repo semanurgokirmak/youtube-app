@@ -28,7 +28,6 @@ const Navbar = () => {
       background="white"
       zIndex={1000}
     >
-      {/* Logo ve menü butonu */}
       <Stack direction="row" gap="80px">
         <Stack direction="row" gap="4px" alignItems="center">
           <MenuButton onClick={toggleSidebar} />
@@ -37,7 +36,6 @@ const Navbar = () => {
         <SearchBar />
       </Stack>
 
-      {/*İkonlar ve kullanıcı resmi */}
       <Stack direction="row" gap="20px" align="center">
         <Image
           src={icon3}

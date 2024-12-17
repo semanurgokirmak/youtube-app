@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import profile from "../Assets/userpage/p1.svg";
 import m0 from "../Assets/userpage/m0.svg";
-import ProfileHeader from "./ProfileHeader";
+import ProfileHeader from "../data/ProfileHeader";
 
 const MargetPhelps = () => {
   return (

@@ -17,7 +17,6 @@ const SideBar = () => {
       pt={4}
       h="full"
       w="full"
-      bgColor={"#fff"}
       alignItems={isSidebarOpen ? "center" : "flex-start"}
       gap={6}
     >
