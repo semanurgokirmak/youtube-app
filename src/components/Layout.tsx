@@ -2,7 +2,6 @@ import Navbar from "./Navbar";
 import SideBar from "./SideBar";
 import { Box } from "@chakra-ui/react";
 import useSidebarStore from "../store/SidebarStore";
-import { useLocation } from "react-router-dom";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -11,8 +10,6 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   const { isSidebarOpen } = useSidebarStore();
 
-  const location = useLocation();
-  const isVideoPage = location.pathname.includes("video");
   return (
     <div>
       <Navbar />

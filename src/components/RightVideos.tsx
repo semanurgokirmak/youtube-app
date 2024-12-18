@@ -61,7 +61,7 @@ export default function RightVideos() {
         <VStack gap={5}>
           {videoImages.map((image, index) => {
             return (
-              <VStack key={index} w="full" align="start" gap={2}>
+              <VStack key={index} w="full" align="start" gap={0.8}>
                 <Box position="relative" width="300px" height="170px">
                   <Image
                     src={image}
@@ -69,16 +69,6 @@ export default function RightVideos() {
                     width="300px"
                     height="170px"
                   />
-                  <Text
-                    bottom="5px"
-                    right="10px"
-                    bg="rgba(0, 0, 0, 0.2)"
-                    color="white"
-                    fontSize="12px"
-                    fontWeight="bold"
-                    px="5px"
-                    borderRadius="2xl"
-                  ></Text>
                 </Box>
 
                 <Text fontSize={"16px"} fontWeight="bold" textAlign="left">

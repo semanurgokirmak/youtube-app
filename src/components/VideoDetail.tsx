@@ -18,7 +18,7 @@ const VideoDetails = () => {
       <HStack align="flex-start" gap={4}>
         <Image src={profil} boxSize="50px" borderRadius="full" alt="Profile" />
 
-        <VStack align="flex-start" gap={1}>
+        <VStack align="flex-start" gap={0.8}>
           <Text fontSize="lg" fontWeight="bold">
             Food & Drink
           </Text>

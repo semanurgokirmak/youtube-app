@@ -11,10 +11,8 @@ const SideBar = () => {
     <VStack
       maxW={isSidebarOpen ? "100px" : "200px"}
       position="fixed"
-      top="84px"
-      left="0"
       pl={isSidebarOpen ? "0" : "10"}
-      pt={4}
+      pt={10}
       h="full"
       w="full"
       alignItems={isSidebarOpen ? "center" : "flex-start"}

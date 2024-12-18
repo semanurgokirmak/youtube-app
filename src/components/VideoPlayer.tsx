@@ -35,12 +35,12 @@ const VideoPlayer = () => {
             Dude You Are Getting A Telescope
           </Text>
 
-          <Text fontSize="sm" color="gray.600" mt={"10px"}>
+          <Text fontSize="sm" color="gray.600" mt={"2px"}>
             123k views
           </Text>
         </Box>
 
-        <HStack gap={4} mt={"20px"}>
+        <HStack gap={4} mt={"30px"}>
           <HStack>
             <Button
               bg={"gray.200"}

@@ -9,8 +9,8 @@ const SidebarLink = ({ iconSrc, url, urlText, isOpen }: SidebarLinkProps) => {
   return (
     <Stack
       direction={isOpen ? "column" : "row"}
-      gap="2px"
-      alignItems={"center"}
+      gap={isOpen ? "2px" : "10px"}
+      alignItems="center"
     >
       <Image
         src={iconSrc}
@@ -20,7 +20,13 @@ const SidebarLink = ({ iconSrc, url, urlText, isOpen }: SidebarLinkProps) => {
         objectFit="contain"
       />
 
-      <Box fontSize="12px" color="red" marginTop="2px" textAlign="center">
+      <Box
+        fontSize="12px"
+        color="red"
+        display="flex"
+        alignItems="center"
+        textAlign="center"
+      >
         {urlText}
       </Box>
     </Stack>
