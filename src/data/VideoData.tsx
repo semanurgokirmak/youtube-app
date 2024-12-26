@@ -1,5 +1,3 @@
-import { Box } from "@chakra-ui/react";
-import VideoCarousel from "../data/VideoCarousel";
 import Foto1 from "../Assets/Cover1.svg";
 import Foto2 from "../Assets/Cover2.svg";
 import Foto3 from "../Assets/Cover3.svg";
@@ -8,7 +6,7 @@ import Foto5 from "../Assets/Cover5.svg";
 import Foto6 from "../Assets/Cover6.svg";
 import Oval from "../Assets/Oval.svg";
 
-const dummyData = {
+export const dollyData = {
   ProfileImage: Oval,
   ProfileTitle: "Dollie Blair",
   videoImages: [Foto1, Foto2, Foto3, Foto4, Foto5, Foto6],
@@ -30,19 +28,3 @@ const dummyData = {
   ],
   videoDurations: ["10:45", "2:34", "5:12", "8:23", "3:50", "12:10"],
 };
-
-export default function DollieBlairVideos() {
-  return (
-    <Box w="full" p={3}>
-      <VideoCarousel
-        ProfileImage={dummyData.ProfileImage}
-        ProfileTitle={dummyData.ProfileTitle}
-        videoImages={dummyData.videoImages}
-        videoTitles={dummyData.videoTitles}
-        videoDateAndView={dummyData.videoDateAndView}
-        videoDurations={dummyData.videoDurations}
-        isBig={false} //
-      />
-    </Box>
-  );
-}

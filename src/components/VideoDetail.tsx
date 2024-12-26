@@ -1,10 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Text, HStack, Image, VStack, Button } from "@chakra-ui/react";
 import profil from "../Assets/videopage/Oval.svg";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import useSidebarStore from "../store/SidebarStore";
 
 const VideoDetails = () => {
   const { isSidebarOpen } = useSidebarStore();
+  const { videoId } = useParams<{ videoId: string }>();
+
+  const [videoDetails, setVideoDetails] = useState<{
+    title: string;
+    description: string;
+    channelTitle: string;
+    publishedAt: string;
+    subscriberCount: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const fetchVideoDetails = async () => {
+      try {
+        const res = await axios.get(
+          "https://youtube.googleapis.com/youtube/v3/videos",
+          {
+            params: {
+              part: "snippet,statistics",
+              id: videoId,
+              key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+            },
+          }
+        );
+        const videoData = res.data.items[0];
+        setVideoDetails({
+          title: videoData.snippet.title,
+          description: videoData.snippet.description,
+          channelTitle: videoData.snippet.channelTitle,
+          publishedAt: new Date(
+            videoData.snippet.publishedAt
+          ).toLocaleDateString(),
+          subscriberCount: `${parseInt(
+            videoData.statistics.subscriberCount
+          ).toLocaleString()}`,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (videoId) {
+      fetchVideoDetails();
+    }
+  }, [videoId]);
+
+  if (!videoDetails) {
+    return <Text>video detayı bulunamadı</Text>;
+  }
 
   return (
     <Box
@@ -20,25 +70,20 @@ const VideoDetails = () => {
 
         <VStack align="flex-start" gap={0.8}>
           <Text fontSize="lg" fontWeight="bold">
-            Food & Drink
+            {videoDetails.channelTitle}
           </Text>
           <Text fontSize="sm" color="gray.600">
-            Published on 14 Jun 2019
+            Published on {videoDetails.publishedAt}
           </Text>
         </VStack>
 
         <Button bg="red" size="sm" ml="auto" borderRadius={"full"}>
-          Subscribe 2.3m
+          Subscribe {videoDetails.subscriberCount}
         </Button>
       </HStack>
 
       <Text fontSize="sm" color="gray.700" mt={4}>
-        A successful marketing plan relies heavily on the pulling-power of
-        advertising copy. Writing result-oriented ad copy is difficult, as it
-        must appeal to, entice, and convince consumers to take action. There is
-        no magic formula to write perfect ad copy; it is based on a number of
-        factors, including ad placement, demographic, even the consumer's mood
-        when they see your ad.
+        {videoDetails.description}
       </Text>
     </Box>
   );

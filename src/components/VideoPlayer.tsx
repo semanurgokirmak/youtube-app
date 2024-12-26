@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
+import axios from "axios";
 import { Box, Text, HStack, Image, Button } from "@chakra-ui/react";
 import more from "../Assets/videopage/More.svg";
 import like from "../Assets/videopage/Like.svg";
@@ -8,7 +10,39 @@ import share from "../Assets/videopage/Share.svg";
 import useSidebarStore from "../store/SidebarStore";
 
 const VideoPlayer = () => {
+  const { videoId } = useParams<{ videoId: string }>();
   const { isSidebarOpen } = useSidebarStore();
+  const [videoData, setVideoData] = useState({
+    title: "",
+    viewCount: "",
+  });
+  useEffect(() => {
+    const fetchVideoData = async () => {
+      try {
+        const res = await axios.get(
+          "https://youtube.googleapis.com/youtube/v3/videos",
+          {
+            params: {
+              part: "snippet,statistics",
+              id: videoId,
+              key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+            },
+          }
+        );
+        const video = res.data.items[0];
+        setVideoData({
+          title: video.snippet.title,
+          viewCount: video.statistics.viewCount,
+        });
+      } catch (error) {
+        console.error("hataa:", error);
+      }
+    };
+
+    if (videoId) {
+      fetchVideoData();
+    }
+  }, [videoId]);
   return (
     <Box mt={"48px"} justifyContent="flex-start" left={"100px"}>
       <Box
@@ -18,7 +52,7 @@ const VideoPlayer = () => {
         overflow="hidden"
       >
         <ReactPlayer
-          url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+          url={`https://www.youtube.com/watch?v=${videoId}`}
           controls={true}
           width="100%"
           height="100%"
@@ -32,11 +66,11 @@ const VideoPlayer = () => {
       >
         <Box>
           <Text fontSize="2xl" fontWeight="bold">
-            Dude You Are Getting A Telescope
+            {videoData.title}
           </Text>
 
           <Text fontSize="sm" color="gray.600" mt={"2px"}>
-            123k views
+            {videoData.viewCount.toLocaleString()} görüntüleme
           </Text>
         </Box>
 
@@ -79,11 +113,16 @@ const VideoPlayer = () => {
               color={"black"}
             >
               <Image src={share} boxSize="20px" alt="Share" />
-              <Text fontSize="sm">Share</Text>
+              <Text fontSize="sm">Paylaş</Text>
             </Button>
           </HStack>
           <HStack>
-            <Image src={more} boxSize="20px" alt="More" objectFit={"contain"} />
+            <Image
+              src={more}
+              boxSize="20px"
+              alt="Daha Fazla"
+              objectFit={"contain"}
+            />
           </HStack>
         </HStack>
       </HStack>

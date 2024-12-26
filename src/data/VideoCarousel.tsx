@@ -5,30 +5,25 @@ import { Navigation } from "swiper/modules";
 import { Box, Stack } from "@chakra-ui/react";
 import ProfileHeader from "./ProfileHeader";
 import VideoCard from "./VideoCard";
+import { Video } from "../interfaces/Video";
 
 type VideoCarouselProps = {
-  ProfileImage: string;
   ProfileTitle: string;
-  videoImages: Array<string>;
-  videoTitles: Array<string>;
-  videoDateAndView: Array<string>;
-  videoDurations: Array<string>;
+  videos: Array<Video>;
   isBig: boolean;
+  onVideoClick: (videoId: string) => void;
 };
 
 const VideoCarousel = ({
-  ProfileImage,
   ProfileTitle,
-  videoDurations,
-  videoImages,
-  videoTitles,
-  videoDateAndView,
+  videos,
   isBig,
+  onVideoClick,
 }: VideoCarouselProps) => {
   return (
     <Box w="full" p={1}>
       <Stack direction="row" w="full" justify="space-between" align="center">
-        <ProfileHeader profileImage={ProfileImage} title={ProfileTitle} />
+        <ProfileHeader title={ProfileTitle} />
       </Stack>
 
       <Box w="full" mt={2}>
@@ -38,17 +33,20 @@ const VideoCarousel = ({
           spaceBetween={20}
           slidesPerView={isBig ? 3 : 5}
         >
-          {videoImages.map((image, index) => (
-            <SwiperSlide key={index}>
-              <VideoCard
-                image={image}
-                title={videoTitles[index]}
-                viewsDate={videoDateAndView[index]}
-                duration={videoDurations[index]}
-                isBig={isBig}
-              />
-            </SwiperSlide>
-          ))}
+          {videos &&
+            videos.map((video, index) => (
+              <SwiperSlide key={index}>
+                <div onClick={() => onVideoClick(video.id)}>
+                  <VideoCard
+                    imageSrc={video.snippet.thumbnails.standard.url}
+                    title={video.snippet.title}
+                    date={video.snippet.publishedAt}
+                    duration={video.contentDetails.duration}
+                    isBig={isBig}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
         </Swiper>
       </Box>
     </Box>

@@ -1,4 +1,4 @@
-import { HStack, Image, Text, VStack } from "@chakra-ui/react";
+import { HStack, Text, VStack } from "@chakra-ui/react";
 
 type ProfileHeaderProps = {
   profileImage?: string;
@@ -6,19 +6,9 @@ type ProfileHeaderProps = {
   subtitle?: string;
 };
 
-export default function ProfileHeader({
-  profileImage,
-  title,
-  subtitle,
-}: ProfileHeaderProps) {
+export default function ProfileHeader({ title, subtitle }: ProfileHeaderProps) {
   return (
     <HStack mb={2} gap={4} mt={2}>
-      <Image
-        src={profileImage}
-        alt={title}
-        borderRadius="full"
-        boxSize="50px"
-      />
       <VStack align="start" gap={5}>
         <Text fontSize="lg" fontWeight="bold">
           {title}
