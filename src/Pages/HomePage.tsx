@@ -9,7 +9,7 @@ import { Video } from "../interfaces/Video";
 const HomePage = () => {
   const [trendingData, setTrendingData] = useState<Array<Video>>([]);
   const [recommendedData, setRecommendedData] = useState<Array<Video>>([]);
-
+  const [foodAndDrinkData, setFoodAndDrinkData] = useState<Array<Video>>([]);
   const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
@@ -21,7 +21,7 @@ const HomePage = () => {
             part: "snippet,contentDetails,statistics",
             chart: "mostPopular",
             regionCode: "US",
-            maxResults: 10,
+            maxResults: 20,
             key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
           },
         }
@@ -41,7 +41,7 @@ const HomePage = () => {
             part: "snippet,contentDetails,statistics",
             chart: "mostPopular",
             regionCode: "TR",
-            maxResults: 10,
+            maxResults: 30,
             key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
           },
         }
@@ -52,10 +52,31 @@ const HomePage = () => {
     }
   }, []);
 
+  const fetchFoodAndDrinkData = useCallback(async () => {
+    try {
+      const res = await axios.get(
+        "https://youtube.googleapis.com/youtube/v3/videos",
+        {
+          params: {
+            part: "snippet,contentDetails,statistics",
+            chart: "mostPopular",
+            regionCode: "DE",
+            maxResults: 20,
+            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+          },
+        }
+      );
+      setFoodAndDrinkData(res.data.items);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   useEffect(() => {
     fetchData();
     fetchRecommendedData();
-  }, [fetchData, fetchRecommendedData]);
+    fetchFoodAndDrinkData();
+  }, [fetchData, fetchRecommendedData, fetchFoodAndDrinkData]);
 
   const handleVideoClick = (videoId: string) => {
     navigate(`/video/${videoId}`);
@@ -73,6 +94,12 @@ const HomePage = () => {
         ProfileTitle="Recommended"
         videos={recommendedData}
         isBig={true}
+        onVideoClick={handleVideoClick}
+      />
+      <VideoCarousel
+        ProfileTitle="Food & Drink"
+        videos={foodAndDrinkData}
+        isBig={false}
         onVideoClick={handleVideoClick}
       />
     </Box>

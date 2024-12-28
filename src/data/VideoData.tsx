@@ -10,3 +10,8 @@ export const recommendedData = {
   ProfileImage: fprofile,
   ProfileTitle: "Recommended",
 };
+
+export const foodAndDrinkData = {
+  ProfileImage: fprofile,
+  ProfileTitle: "Food & Drink",
+};
