@@ -70,7 +70,10 @@ const VideoPlayer = () => {
           </Text>
 
           <Text fontSize="sm" color="gray.600" mt={"2px"}>
-            {videoData.viewCount.toLocaleString()} görüntüleme
+            {new Intl.NumberFormat("tr-TR").format(
+              parseInt(videoData.viewCount)
+            )}{" "}
+            görüntüleme
           </Text>
         </Box>
 

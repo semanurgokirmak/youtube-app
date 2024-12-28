@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Box, Text, HStack, Image, VStack, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  HStack,
+  Image,
+  VStack,
+  Button,
+  Link,
+} from "@chakra-ui/react";
 import profil from "../Assets/videopage/Oval.svg";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -16,6 +24,7 @@ const VideoDetails = () => {
     publishedAt: string;
     subscriberCount: string;
   } | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const fetchVideoDetails = async () => {
@@ -53,8 +62,13 @@ const VideoDetails = () => {
   }, [videoId]);
 
   if (!videoDetails) {
-    return <Text>video detayı bulunamadı</Text>;
+    return <Text>Video detayı bulunamadı</Text>;
   }
+
+  const truncatedDescription =
+    videoDetails.description.length > 100
+      ? videoDetails.description.substring(0, 300) + "..."
+      : videoDetails.description;
 
   return (
     <Box
@@ -73,7 +87,7 @@ const VideoDetails = () => {
             {videoDetails.channelTitle}
           </Text>
           <Text fontSize="sm" color="gray.600">
-            Published on {videoDetails.publishedAt}
+            {videoDetails.publishedAt} Tarihinde Yayınlandı
           </Text>
         </VStack>
 
@@ -83,8 +97,20 @@ const VideoDetails = () => {
       </HStack>
 
       <Text fontSize="sm" color="gray.700" mt={4}>
-        {videoDetails.description}
+        {isExpanded ? videoDetails.description : truncatedDescription}{" "}
       </Text>
+
+      {videoDetails.description.length > 300 && (
+        <Link
+          mt={2}
+          fontSize="sm"
+          color="blue.500"
+          onClick={() => setIsExpanded(!isExpanded)}
+          style={{ cursor: "pointer" }}
+        >
+          {isExpanded ? "Daha az" : "Daha fazla"}
+        </Link>
+      )}
     </Box>
   );
 };
