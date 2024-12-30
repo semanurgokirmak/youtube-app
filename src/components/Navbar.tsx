@@ -6,6 +6,7 @@ import Logo from "./Logo";
 import MenuButton from "./MenuButton";
 import { ColorModeToggle } from "./Button";
 import useSidebarStore from "../store/SidebarStore";
+import LoginButton from "./LoginButton";
 import Userpic from "../Assets/Userpic.svg";
 import icon1 from "../Assets/icon1.svg";
 import icon2 from "../Assets/icon2.svg";
@@ -55,6 +56,7 @@ const Navbar = () => {
           boxSize="20px"
           objectFit="contain"
         />
+        <LoginButton />
         <Link to="/user">
           <Image
             src={Userpic}
