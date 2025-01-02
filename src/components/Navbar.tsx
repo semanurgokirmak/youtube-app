@@ -26,7 +26,6 @@ const Navbar = () => {
       left={0}
       px={8}
       py={5}
-      background="white"
       zIndex={1000}
     >
       <Stack direction="row" gap="80px">

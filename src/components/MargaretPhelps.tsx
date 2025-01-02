@@ -4,7 +4,7 @@ import profile from "../Assets/userpage/p1.svg";
 import m0 from "../Assets/userpage/m0.svg";
 import ProfileHeader from "../data/ProfileHeader";
 
-const MargetPhelps = () => {
+const MargaretPhelps = () => {
   return (
     <Box w="full" p={5}>
       <ProfileHeader
@@ -42,4 +42,4 @@ const MargetPhelps = () => {
   );
 };
 
-export default MargetPhelps;
+export default MargaretPhelps;

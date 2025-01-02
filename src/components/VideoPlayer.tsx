@@ -44,7 +44,7 @@ const VideoPlayer = () => {
     }
   }, [videoId]);
   return (
-    <Box mt={"48px"} justifyContent="flex-start" left={"100px"}>
+    <Box mt={"48px"} justifyContent="flex-start" ml="30px">
       <Box
         width={isSidebarOpen ? "1000px" : "900px"}
         height={isSidebarOpen ? "562px" : "506px"}

@@ -4,6 +4,9 @@ import { GoogleLogin } from "@react-oauth/google";
 const LoginButton: React.FC = () => {
   const handleSuccess = (response: any) => {
     console.log("Login Successful:", response);
+    // token
+    const token = response.credential;
+    console.log("Token:", token);
   };
 
   const handleError = () => {

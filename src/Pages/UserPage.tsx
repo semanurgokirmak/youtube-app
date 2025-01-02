@@ -1,11 +1,50 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Image, Flex, Box } from "@chakra-ui/react";
 import mtop from "../Assets/userpage/mtop.svg";
-import MargaretPhelpsVideos from "../components/MargaretPhelpsVideos";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import MargetPhelps from "../components/MargaretPhelps";
 import UserpageRecommended from "../components/UserpageRecommended";
+import VideoCarousel from "../data/VideoCarousel";
+import { Video } from "../interfaces/Video";
 
 const UserPage = () => {
+  const [margaretPhelpsData, setMargaretPhelpsData] = useState<Array<Video>>(
+    []
+  );
+  const navigate = useNavigate();
+
+  // Margaret Phelps için veri çekme fonksiyonu
+  const fetchMargaretPhelpsData = useCallback(async () => {
+    try {
+      const res = await axios.get(
+        "https://youtube.googleapis.com/youtube/v3/videos",
+        {
+          params: {
+            part: "snippet,contentDetails,statistics",
+            chart: "mostPopular",
+            regionCode: "US",
+            maxResults: 20,
+            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+          },
+        }
+      );
+      setMargaretPhelpsData(res.data.items);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  // API'den veriyi almak için useEffect
+  useEffect(() => {
+    fetchMargaretPhelpsData();
+  }, [fetchMargaretPhelpsData]);
+
+  // Video tıklama handler'ı
+  const handleVideoClick = (videoId: string) => {
+    navigate(`/video/${videoId}`);
+  };
+
   return (
     <div>
       <Image
@@ -29,7 +68,13 @@ const UserPage = () => {
       </Flex>
 
       <Box>
-        <MargaretPhelpsVideos />
+        {/* Margaret Phelps'in videolarını listeleme */}
+        <VideoCarousel
+          ProfileTitle="Margaret Phelps Videos"
+          videos={margaretPhelpsData}
+          isBig={false}
+          onVideoClick={handleVideoClick}
+        />
       </Box>
     </div>
   );

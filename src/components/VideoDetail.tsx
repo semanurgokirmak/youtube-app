@@ -74,7 +74,6 @@ const VideoDetails = () => {
     <Box
       mt={"10px"}
       width={isSidebarOpen ? "1000px" : "900px"}
-      bg="white"
       borderRadius="md"
       p={4}
       left={"60px"}

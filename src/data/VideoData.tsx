@@ -15,3 +15,8 @@ export const foodAndDrinkData = {
   ProfileImage: fprofile,
   ProfileTitle: "Food & Drink",
 };
+
+export const margetPhelpsData = {
+  ProfileImage: fprofile,
+  ProfileTitle: "Margaret Phelps Videos",
+};
