@@ -3,9 +3,16 @@ import { ISidebarLinks } from "@/interfaces/ISidebar";
 
 interface SidebarLinkProps extends ISidebarLinks {
   isOpen: boolean;
+  isActive: boolean; // Yeni props
 }
 
-const SidebarLink = ({ iconSrc, url, urlText, isOpen }: SidebarLinkProps) => {
+const SidebarLink = ({
+  iconSrc,
+  url,
+  urlText,
+  isOpen,
+  isActive,
+}: SidebarLinkProps) => {
   return (
     <Stack
       direction={isOpen ? "column" : "row"}
@@ -22,7 +29,7 @@ const SidebarLink = ({ iconSrc, url, urlText, isOpen }: SidebarLinkProps) => {
 
       <Box
         fontSize="12px"
-        color="red"
+        color={isActive ? "red" : "black"} // Aktifse kırmızı, değilse siyah
         display="flex"
         alignItems="center"
         textAlign="center"

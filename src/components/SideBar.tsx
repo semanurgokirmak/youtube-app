@@ -1,26 +1,14 @@
-import { VStack, Box, Text, Stack, Image } from "@chakra-ui/react";
+import React from "react";
+import { VStack, Box } from "@chakra-ui/react";
 import { primaryLinks, secondaryLinks } from "../data/sidebar-links";
 import SidebarLink from "./SidebarLink";
 import useSidebarStore from "../store/SidebarStore";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import Subscriptions from "./Subscriptions";
 
-const subscriptions = [
-  { name: "Gussie Singleton", profilePic: "https://via.placeholder.com/40" },
-  { name: "Nora Francis", profilePic: "https://via.placeholder.com/40" },
-  { name: "Belle Briggs", profilePic: "https://via.placeholder.com/40" },
-  { name: "Eunice Cortez", profilePic: "https://via.placeholder.com/40" },
-  { name: "Emma Hanson", profilePic: "https://via.placeholder.com/40" },
-  { name: "Leah Berry", profilePic: "https://via.placeholder.com/40" },
-  { name: "Belle Briggs", profilePic: "https://via.placeholder.com/40" },
-  { name: "Eunice Cortez", profilePic: "https://via.placeholder.com/40" },
-  { name: "Emma Hanson", profilePic: "https://via.placeholder.com/40" },
-  { name: "Leah Berry", profilePic: "https://via.placeholder.com/40" },
-  { name: "Belle Briggs", profilePic: "https://via.placeholder.com/40" },
-  { name: "Eunice Cortez", profilePic: "https://via.placeholder.com/40" },
-];
-
-const SideBar = () => {
+const SideBar: React.FC = () => {
   const { isSidebarOpen } = useSidebarStore();
+  const location = useLocation();
 
   return (
     <VStack
@@ -32,56 +20,47 @@ const SideBar = () => {
       w="full"
       alignItems={isSidebarOpen ? "center" : "flex-start"}
       gap={5}
-      overflowY="auto"
+      overflowY="hidden"
+      _hover={{
+        overflowY: "auto",
+        "&::-webkit-scrollbar": {
+          width: "8px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "gray.400",
+          borderRadius: "4px",
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "gray.600",
+        },
+      }}
     >
+      {/* Primary Links */}
       {primaryLinks.map((item, index) => (
         <Link to={item.url} key={`primary-${index}`}>
-          <SidebarLink isOpen={isSidebarOpen} {...item} />
+          <SidebarLink
+            isOpen={isSidebarOpen}
+            isActive={location.pathname === item.url} // Aktif kontrolü
+            {...item}
+          />
         </Link>
       ))}
 
       <Box> </Box>
 
+      {/* Secondary Links */}
       {secondaryLinks.map((item, index) => (
         <Link to={item.url} key={`secondary-${index}`}>
-          <SidebarLink isOpen={isSidebarOpen} {...item} />
+          <SidebarLink
+            isOpen={isSidebarOpen}
+            isActive={location.pathname === item.url} // Aktif kontrolü
+            {...item}
+          />
         </Link>
       ))}
 
-      {!isSidebarOpen && (
-        <Box w="full">
-          <Text
-            fontSize="sm"
-            fontWeight="bold"
-            mb={4}
-            color="gray.600"
-            textAlign="left"
-          >
-            Subscriptions
-          </Text>
-          <VStack align="flex-start" gap={2}>
-            {subscriptions.map((channel, index) => (
-              <Stack
-                key={`subscription-${index}`}
-                direction="row"
-                align="center"
-                gap={4}
-                w="full"
-              >
-                <Image
-                  src={channel.profilePic}
-                  alt={channel.name}
-                  boxSize="30px"
-                  borderRadius="full"
-                />
-                <Text fontSize="sm" color="gray.700">
-                  {channel.name}
-                </Text>
-              </Stack>
-            ))}
-          </VStack>
-        </Box>
-      )}
+      {/* Subscriptions */}
+      {!isSidebarOpen && <Subscriptions />}
     </VStack>
   );
 };
