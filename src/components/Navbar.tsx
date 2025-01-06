@@ -27,6 +27,7 @@ const Navbar = () => {
       py={5}
       background="white"
       zIndex={1000}
+      bg="white"
     >
       <Stack direction="row" gap="80px">
         <Stack direction="row" gap="4px" alignItems="center">

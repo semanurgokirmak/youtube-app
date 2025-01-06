@@ -1,4 +1,5 @@
 import { VStack, Box, Image, Text } from "@chakra-ui/react";
+import useSidebarStore from "../store/SidebarStore";
 
 type VideoCardProps = {
   image: string;
@@ -15,14 +16,37 @@ export default function VideoCard({
   duration,
   isBig,
 }: VideoCardProps) {
+<<<<<<< Updated upstream
   return isBig ? (
     <VStack w="500px" align="start" gap={1}>
       <Box position="relative" width="400px" height="240px">
+=======
+  const { isSidebarOpen } = useSidebarStore();
+
+  const bigBoxWidth = isSidebarOpen ? "450px" : "420px";
+  const bigImageWidth = bigBoxWidth;
+  const smallBoxWidth = isSidebarOpen ? "270px" : "250px";
+  const smallImageWidth = smallBoxWidth;
+
+  const maxLength = isBig ? 45 : 25;
+  const truncatedTitle = truncateTitle(title, maxLength);
+
+  return isBig ? (
+    <VStack w="500px" align="start" gap={1}>
+      <Box
+        position="relative"
+        width={bigBoxWidth}
+        height="230px"
+        _hover={{
+          cursor: "pointer",
+        }}
+      >
+>>>>>>> Stashed changes
         <Image
           src={image}
           borderRadius="2xl"
-          width="400px"
-          height="240px"
+          width={bigImageWidth}
+          height="230px"
           objectFit="cover"
         />
         {duration && (
@@ -48,6 +72,7 @@ export default function VideoCard({
     </VStack>
   ) : (
     <VStack w="400px" align="start" gap={1}>
+<<<<<<< Updated upstream
       <Box position="relative" width="250px" height="150px">
         <Image src={image} borderRadius="2xl" width="250px" height="150px" />
         {duration && (
@@ -65,6 +90,22 @@ export default function VideoCard({
             {duration}
           </Text>
         )}
+=======
+      <Box
+        position="relative"
+        width={smallBoxWidth}
+        height="140px"
+        _hover={{
+          cursor: "pointer",
+        }}
+      >
+        <Image
+          src={imageSrc}
+          borderRadius="2xl"
+          width={smallImageWidth}
+          height="140px"
+        />
+>>>>>>> Stashed changes
       </Box>
       <Text fontSize="16px">{title}</Text>
       <Text fontSize="13px" color="gray.500">
