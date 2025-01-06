@@ -61,7 +61,7 @@ const Subscriptions: React.FC = () => {
             </Stack>
           ))
         ) : (
-          <Text>No subscriptions found.</Text>
+          <Text>No subscriptions found..</Text>
         )}
       </VStack>
     </Box>
