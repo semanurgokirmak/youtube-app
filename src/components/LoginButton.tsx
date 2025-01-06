@@ -17,7 +17,7 @@ const LoginButton: React.FC = () => {
   };
 
   const handleError = () => {
-    console.log("Login Failed");
+    console.log("Login Failed.");
   };
 
   const handleLogout = () => {

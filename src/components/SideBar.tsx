@@ -35,12 +35,11 @@ const SideBar: React.FC = () => {
         },
       }}
     >
-      {/* Primary Links */}
       {primaryLinks.map((item, index) => (
         <Link to={item.url} key={`primary-${index}`}>
           <SidebarLink
             isOpen={isSidebarOpen}
-            isActive={location.pathname === item.url} // Aktif kontrolü
+            isActive={location.pathname === item.url}
             {...item}
           />
         </Link>
@@ -48,18 +47,16 @@ const SideBar: React.FC = () => {
 
       <Box> </Box>
 
-      {/* Secondary Links */}
       {secondaryLinks.map((item, index) => (
         <Link to={item.url} key={`secondary-${index}`}>
           <SidebarLink
             isOpen={isSidebarOpen}
-            isActive={location.pathname === item.url} // Aktif kontrolü
+            isActive={location.pathname === item.url}
             {...item}
           />
         </Link>
       ))}
 
-      {/* Subscriptions */}
       {!isSidebarOpen && <Subscriptions />}
     </VStack>
   );
