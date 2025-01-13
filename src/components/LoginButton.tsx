@@ -1,56 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { GoogleLogin } from "@react-oauth/google";
+import React from "react";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useAuth } from "../components/AuthContext";
 
 const LoginButton: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
 
-  useEffect(() => {
-    console.log("isLoggedIn state updated:", isLoggedIn);
-  }, [isLoggedIn]);
-
-  const handleSuccess = (response: any) => {
-    const token = response.credential;
-    console.log("Token:", token);
-    localStorage.setItem("google_token", token);
-    setIsLoggedIn(true);
-    console.log("Giriş yapıldı");
-  };
-
-  const handleError = () => {
-    console.log("Login Failed.");
-  };
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      const token = tokenResponse.access_token;
+      if (token) {
+        localStorage.setItem("google_access_token", token);
+        setIsLoggedIn(true);
+        console.log("Login successful, token saved.");
+      }
+    },
+    onError: () => {
+      console.log("Login failed.");
+    },
+  });
 
   const handleLogout = () => {
-    localStorage.removeItem("google_token");
+    localStorage.removeItem("google_access_token");
     setIsLoggedIn(false);
-    console.log("Çıkış yapıldı");
+    console.log("Logged out.");
   };
 
   return (
     <div>
       {!isLoggedIn ? (
-        <GoogleLogin
-          onSuccess={handleSuccess}
-          onError={handleError}
-          useOneTap
-          theme="outline"
-          shape="rectangular"
-          text="signin_with"
-        />
+        <button onClick={() => login()} style={{ padding: "10px 20px" }}>
+          Sign in with Google 🚀
+        </button>
       ) : (
-        <button
-          onClick={handleLogout}
-          style={{
-            padding: "10px 20px",
-            backgroundColor: "white",
-            color: "black",
-            border: "none",
-            borderRadius: "30px",
-            cursor: "pointer",
-            fontSize: "16px",
-          }}
-        >
-          Çıkış Yap
+        <button onClick={handleLogout} style={{ padding: "10px 20px" }}>
+          Logout
         </button>
       )}
     </div>

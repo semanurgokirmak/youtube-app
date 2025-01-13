@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { VStack, Box, Text, Stack, Image } from "@chakra-ui/react";
+import { useAuth } from "../components/AuthContext";
 
 const Subscriptions: React.FC = () => {
+  const { isLoggedIn } = useAuth();
   const [subscriptions, setSubscriptions] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("google_token");
+    if (!isLoggedIn) {
+      setSubscriptions([]);
+      setError("User is not logged in.");
+      return;
+    }
 
+    const token = localStorage.getItem("google_access_token");
     if (token) {
       fetch(
-        "https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&mine=true&key=AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+        "https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&mine=true&maxResults=50&key=AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
         {
           method: "GET",
           headers: {
@@ -17,16 +25,26 @@ const Subscriptions: React.FC = () => {
           },
         }
       )
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+          return response.json();
+        })
         .then((data) => {
-          console.log("YouTube Subscriptions data:", data);
           setSubscriptions(data.items || []);
+          setError(null);
         })
         .catch((error) => {
           console.error("Error fetching YouTube subscriptions:", error);
+          setError("Failed to fetch subscriptions.");
         });
     }
-  }, []);
+  }, [isLoggedIn]);
+
+  if (!isLoggedIn) {
+    return null;
+  }
 
   return (
     <Box w="full">
@@ -39,6 +57,11 @@ const Subscriptions: React.FC = () => {
       >
         Subscriptions
       </Text>
+      {error && (
+        <Text color="red.500" mb={4}>
+          {error}
+        </Text>
+      )}
       <VStack align="flex-start" gap={2}>
         {subscriptions.length > 0 ? (
           subscriptions.map((channel, index) => (

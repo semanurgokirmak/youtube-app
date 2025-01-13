@@ -5,10 +5,12 @@ import SidebarLink from "./SidebarLink";
 import useSidebarStore from "../store/SidebarStore";
 import { Link, useLocation } from "react-router-dom";
 import Subscriptions from "./Subscriptions";
+import { useAuth } from "../components/AuthContext";
 
 const SideBar: React.FC = () => {
   const { isSidebarOpen } = useSidebarStore();
   const location = useLocation();
+  const { isLoggedIn } = useAuth();
 
   return (
     <VStack
@@ -35,27 +37,44 @@ const SideBar: React.FC = () => {
         },
       }}
     >
-      {primaryLinks.map((item, index) => (
-        <Link to={item.url} key={`primary-${index}`}>
-          <SidebarLink
-            isOpen={isSidebarOpen}
-            isActive={location.pathname === item.url}
-            {...item}
-          />
-        </Link>
-      ))}
+      {primaryLinks.map((item, index) => {
+        if (item.urlText === "Subscriptions" && !isLoggedIn) {
+          return null;
+        }
+        return (
+          <Link to={item.url} key={`primary-${index}`}>
+            <SidebarLink
+              isOpen={isSidebarOpen}
+              isActive={location.pathname === item.url}
+              {...item}
+            />
+          </Link>
+        );
+      })}
 
       <Box> </Box>
 
-      {secondaryLinks.map((item, index) => (
-        <Link to={item.url} key={`secondary-${index}`}>
-          <SidebarLink
-            isOpen={isSidebarOpen}
-            isActive={location.pathname === item.url}
-            {...item}
-          />
-        </Link>
-      ))}
+      {secondaryLinks.map((item, index) => {
+        if (
+          (item.urlText === "History" ||
+            item.urlText === "Favorites" ||
+            item.urlText === "Subscriptions" ||
+            item.urlText === "Liked Videos" ||
+            item.urlText === "Watch Later") &&
+          !isLoggedIn
+        ) {
+          return null;
+        }
+        return (
+          <Link to={item.url} key={`secondary-${index}`}>
+            <SidebarLink
+              isOpen={isSidebarOpen}
+              isActive={location.pathname === item.url}
+              {...item}
+            />
+          </Link>
+        );
+      })}
 
       {!isSidebarOpen && <Subscriptions />}
     </VStack>

@@ -51,7 +51,7 @@ export const secondaryLinks: Array<ISidebarLinks> = [
     iconSrc: uiIcon7,
   },
   {
-    url: "#",
+    url: "/likedvideos",
     urlText: "Liked Videos",
     iconSrc: uiIcon8,
   },

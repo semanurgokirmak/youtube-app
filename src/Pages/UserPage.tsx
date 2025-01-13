@@ -14,7 +14,6 @@ const UserPage = () => {
   );
   const navigate = useNavigate();
 
-  // Margaret Phelps için veri çekme fonksiyonu
   const fetchMargaretPhelpsData = useCallback(async () => {
     try {
       const res = await axios.get(
@@ -35,12 +34,10 @@ const UserPage = () => {
     }
   }, []);
 
-  // API'den veriyi almak için useEffect
   useEffect(() => {
     fetchMargaretPhelpsData();
   }, [fetchMargaretPhelpsData]);
 
-  // Video tıklama handler'ı
   const handleVideoClick = (videoId: string) => {
     navigate(`/video/${videoId}`);
   };
@@ -68,7 +65,6 @@ const UserPage = () => {
       </Flex>
 
       <Box>
-        {/* Margaret Phelps'in videolarını listeleme */}
         <VideoCarousel
           ProfileTitle="Margaret Phelps Videos"
           videos={margaretPhelpsData}
