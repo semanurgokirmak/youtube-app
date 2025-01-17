@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Image, Flex, Box } from "@chakra-ui/react";
+import { Image, Flex, Box, Button } from "@chakra-ui/react";
 import mtop from "../Assets/userpage/mtop.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,15 +14,33 @@ const UserPage = () => {
   );
   const navigate = useNavigate();
 
-  const fetchMargaretPhelpsData = useCallback(async () => {
+  const fetchChannelData = useCallback(async () => {
     try {
       const res = await axios.get(
-        "https://youtube.googleapis.com/youtube/v3/videos",
+        "https://www.googleapis.com/youtube/v3/channels",
         {
           params: {
-            part: "snippet,contentDetails,statistics",
-            chart: "mostPopular",
-            regionCode: "US",
+            part: "snippet,contentDetails",
+            mine: "true",
+            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+          },
+        }
+      );
+      const channelId = res.data.items[0].id;
+      fetchVideosFromChannel(channelId);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  const fetchVideosFromChannel = useCallback(async (channelId: string) => {
+    try {
+      const res = await axios.get(
+        "https://www.googleapis.com/youtube/v3/search",
+        {
+          params: {
+            part: "snippet,contentDetails",
+            channelId: channelId,
             maxResults: 20,
             key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
           },
@@ -35,8 +53,8 @@ const UserPage = () => {
   }, []);
 
   useEffect(() => {
-    fetchMargaretPhelpsData();
-  }, [fetchMargaretPhelpsData]);
+    fetchChannelData();
+  }, [fetchChannelData]);
 
   const handleVideoClick = (videoId: string) => {
     navigate(`/video/${videoId}`);
@@ -54,7 +72,7 @@ const UserPage = () => {
         zIndex={-1}
       />
 
-      <Flex justifyContent="space-between" alignItems="flex-start" gap={8}>
+      <Flex justifyContent="space-between" alignItems="flex-start">
         <Box flex="3">
           <MargetPhelps />
         </Box>
@@ -65,12 +83,18 @@ const UserPage = () => {
       </Flex>
 
       <Box>
-        <VideoCarousel
-          ProfileTitle="Margaret Phelps Videos"
-          videos={margaretPhelpsData}
-          isBig={false}
-          onVideoClick={handleVideoClick}
-        />
+        {margaretPhelpsData.length === 0 ? (
+          <Box textAlign="flex-start" mt={5} ml={6}>
+            <Button>Video Paylaş</Button>
+          </Box>
+        ) : (
+          <VideoCarousel
+            ProfileTitle="Margaret Phelps Videos"
+            videos={margaretPhelpsData}
+            isBig={false}
+            onVideoClick={handleVideoClick}
+          />
+        )}
       </Box>
     </div>
   );

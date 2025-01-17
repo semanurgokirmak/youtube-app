@@ -23,7 +23,7 @@ export const primaryLinks: Array<ISidebarLinks> = [
     iconSrc: uiIcon2,
   },
   {
-    url: "/video",
+    url: "/#",
     urlText: "Subscriptions",
     iconSrc: uiIcon3,
   },
@@ -31,7 +31,7 @@ export const primaryLinks: Array<ISidebarLinks> = [
 
 export const secondaryLinks: Array<ISidebarLinks> = [
   {
-    url: "/deneme",
+    url: "#",
     urlText: "Library",
     iconSrc: uiIcon4,
   },

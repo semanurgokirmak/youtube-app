@@ -1,4 +1,5 @@
 import { VStack, Box, Image, Text } from "@chakra-ui/react";
+import useSidebarStore from "../store/SidebarStore";
 
 type VideoCardProps = {
   imageSrc: string;
@@ -22,15 +23,16 @@ export default function VideoCard({
   duration,
   isBig,
 }: VideoCardProps) {
-  const maxLength = isBig ? 45 : 25;
+  const maxLength = isBig ? 40 : 25;
   const truncatedTitle = truncateTitle(title, maxLength);
+  const { isSidebarOpen } = useSidebarStore();
 
   return isBig ? (
     <VStack w="500px" align="start" gap={1}>
       <Box
         position="relative"
-        width="400px"
-        height="240px"
+        width={isSidebarOpen ? "450px" : "420px"}
+        height={isSidebarOpen ? "250px" : "230px"}
         _hover={{
           cursor: "pointer",
         }}
@@ -38,8 +40,8 @@ export default function VideoCard({
         <Image
           src={imageSrc}
           borderRadius="2xl"
-          width="400px"
-          height="240px"
+          width={isSidebarOpen ? "450px" : "420px"}
+          height={isSidebarOpen ? "250px" : "230px"}
           objectFit="cover"
         />
       </Box>
@@ -62,13 +64,18 @@ export default function VideoCard({
     <VStack w="400px" align="start" gap={1}>
       <Box
         position="relative"
-        width="250px"
-        height="150px"
+        width={isSidebarOpen ? "270px" : "250px"}
+        height={isSidebarOpen ? "150px" : "140px"}
         _hover={{
           cursor: "pointer",
         }}
       >
-        <Image src={imageSrc} borderRadius="2xl" width="250px" height="150px" />
+        <Image
+          src={imageSrc}
+          borderRadius="2xl"
+          width={isSidebarOpen ? "270px" : "250px"}
+          height={isSidebarOpen ? "150px" : "140px"}
+        />
       </Box>
       <Text
         fontSize="16px"

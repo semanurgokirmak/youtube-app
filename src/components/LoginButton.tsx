@@ -12,6 +12,7 @@ const LoginButton: React.FC = () => {
         localStorage.setItem("google_access_token", token);
         setIsLoggedIn(true);
         console.log("Login successful, token saved.");
+        console.log("Access Token:", token);
       }
     },
     onError: () => {
@@ -29,11 +30,11 @@ const LoginButton: React.FC = () => {
     <div>
       {!isLoggedIn ? (
         <button onClick={() => login()} style={{ padding: "10px 20px" }}>
-          Sign in with Google 🚀
+          Giriş Yap
         </button>
       ) : (
         <button onClick={handleLogout} style={{ padding: "10px 20px" }}>
-          Logout
+          Çıkış Yap
         </button>
       )}
     </div>

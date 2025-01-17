@@ -3,7 +3,7 @@ import { ISidebarLinks } from "@/interfaces/ISidebar";
 
 interface SidebarLinkProps extends ISidebarLinks {
   isOpen: boolean;
-  isActive: boolean; // Yeni props
+  isActive: boolean;
 }
 
 const SidebarLink = ({
@@ -29,7 +29,7 @@ const SidebarLink = ({
 
       <Box
         fontSize="12px"
-        color={isActive ? "red" : "black"} // Aktifse kırmızı, değilse siyah
+        color={isActive ? "red" : "black"}
         display="flex"
         alignItems="center"
         textAlign="center"

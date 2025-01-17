@@ -16,6 +16,7 @@ const VideoPlayer = () => {
     title: "",
     viewCount: "",
   });
+
   useEffect(() => {
     const fetchVideoData = async () => {
       try {
@@ -43,6 +44,7 @@ const VideoPlayer = () => {
       fetchVideoData();
     }
   }, [videoId]);
+
   return (
     <Box mt={"48px"} justifyContent="flex-start" ml="30px">
       <Box

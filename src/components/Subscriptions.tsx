@@ -15,6 +15,7 @@ const Subscriptions: React.FC = () => {
     }
 
     const token = localStorage.getItem("google_access_token");
+    console.log("tokenim:", token);
     if (token) {
       fetch(
         "https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&mine=true&maxResults=50&key=AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
@@ -34,10 +35,10 @@ const Subscriptions: React.FC = () => {
         .then((data) => {
           setSubscriptions(data.items || []);
           setError(null);
+          console.log("data:", data);
         })
         .catch((error) => {
           console.error("Error fetching YouTube subscriptions:", error);
-          setError("Failed to fetch subscriptions.");
         });
     }
   }, [isLoggedIn]);

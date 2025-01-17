@@ -41,6 +41,7 @@ const SideBar: React.FC = () => {
         if (item.urlText === "Subscriptions" && !isLoggedIn) {
           return null;
         }
+
         return (
           <Link to={item.url} key={`primary-${index}`}>
             <SidebarLink
