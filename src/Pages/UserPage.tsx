@@ -7,11 +7,13 @@ import MargetPhelps from "../components/MargaretPhelps";
 import UserpageRecommended from "../components/UserpageRecommended";
 import VideoCarousel from "../data/VideoCarousel";
 import { Video } from "../interfaces/Video";
+import { useAuth } from "../components/AuthContext";
 
 const UserPage = () => {
   const [margaretPhelpsData, setMargaretPhelpsData] = useState<Array<Video>>(
     []
   );
+  const { setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   const fetchChannelData = useCallback(async () => {
@@ -60,6 +62,12 @@ const UserPage = () => {
     navigate(`/video/${videoId}`);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("google_access_token");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
+
   return (
     <div>
       <Image
@@ -82,10 +90,17 @@ const UserPage = () => {
         </Box>
       </Flex>
 
-      <Box>
+      <Flex justifyContent="space-between" alignItems="center" mt={5} mx={6}>
+        <Button>Share Video</Button>
+        <Button onClick={handleLogout} colorScheme="red">
+          Log Out
+        </Button>
+      </Flex>
+
+      <Box mt={5}>
         {margaretPhelpsData.length === 0 ? (
-          <Box textAlign="flex-start" mt={5} ml={6}>
-            <Button>Video Paylaş</Button>
+          <Box textAlign="center" mt={5}>
+            No video uploaded yet.
           </Box>
         ) : (
           <VideoCarousel

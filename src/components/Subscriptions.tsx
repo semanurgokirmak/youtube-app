@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { VStack, Box, Text, Stack, Image } from "@chakra-ui/react";
 import { useAuth } from "../components/AuthContext";
+import { useTheme } from "next-themes"; // Importing from next-themes
 
 const Subscriptions: React.FC = () => {
   const { isLoggedIn } = useAuth();
   const [subscriptions, setSubscriptions] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const { theme } = useTheme(); // Get theme from next-themes
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -79,7 +81,10 @@ const Subscriptions: React.FC = () => {
                 boxSize="30px"
                 borderRadius="full"
               />
-              <Text fontSize="sm" color="gray.700">
+              <Text
+                fontSize="sm"
+                color={theme === "dark" ? "white" : "gray.700"} // Dynamic color based on next-themes theme
+              >
                 {channel.snippet.title}
               </Text>
             </Stack>

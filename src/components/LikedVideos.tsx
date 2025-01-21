@@ -73,13 +73,20 @@ const LikedVideos: React.FC = () => {
                 w="full"
                 p={4}
                 borderRadius="md"
+                boxShadow="lg"
               >
                 <Image
-                  src={video.snippet.thumbnails.default.url}
+                  src={
+                    video.snippet.thumbnails.maxres
+                      ? video.snippet.thumbnails.maxres.url
+                      : video.snippet.thumbnails.high.url
+                  }
                   alt={video.snippet.title}
                   width={"200px"}
                   height={"112px"}
+                  borderRadius="md"
                 />
+
                 <Box>
                   <Text fontSize="md" fontWeight="bold" mb={1}>
                     {video.snippet.title}

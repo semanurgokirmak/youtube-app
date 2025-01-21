@@ -14,7 +14,7 @@ export default function RightVideos() {
           params: {
             part: "snippet,contentDetails,statistics",
             chart: "mostPopular",
-            regionCode: "FR",
+            regionCode: "TR",
             maxResults: 10,
             key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
           },

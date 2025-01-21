@@ -18,6 +18,8 @@ const LoginButton: React.FC = () => {
     onError: () => {
       console.log("Login failed.");
     },
+    scope:
+      "https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.force-ssl",
   });
 
   const handleLogout = () => {

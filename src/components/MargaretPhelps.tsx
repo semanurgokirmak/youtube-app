@@ -63,7 +63,7 @@ const MargaretPhelps = () => {
       ) : (
         <VStack align="start" gap={4}>
           <Text fontSize="2xl" fontWeight="bold" mb={4}>
-            Oynatma Listeleri
+            Playlists
           </Text>
           <Flex wrap="wrap" justify="flex-start" gap={6}>
             {playlist.map((item) => (

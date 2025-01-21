@@ -1,4 +1,5 @@
 import { Box, Image, Stack } from "@chakra-ui/react";
+import { useTheme } from "next-themes";
 import { ISidebarLinks } from "@/interfaces/ISidebar";
 
 interface SidebarLinkProps extends ISidebarLinks {
@@ -13,6 +14,8 @@ const SidebarLink = ({
   isOpen,
   isActive,
 }: SidebarLinkProps) => {
+  const { theme } = useTheme();
+
   return (
     <Stack
       direction={isOpen ? "column" : "row"}
@@ -25,11 +28,11 @@ const SidebarLink = ({
         width="15px"
         height="15px"
         objectFit="contain"
+        filter={theme === "light" ? "none" : "invert(1)"}
       />
-
       <Box
         fontSize="12px"
-        color={isActive ? "red" : "black"}
+        color={isActive ? "red" : theme === "light" ? "gray.600" : "white"}
         display="flex"
         alignItems="center"
         textAlign="center"

@@ -11,7 +11,6 @@ const SearchResultsPage: React.FC = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      return;
       try {
         const response = await fetch(
           `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&key=AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ`
@@ -56,7 +55,11 @@ const SearchResultsPage: React.FC = () => {
                 borderRadius="md"
               >
                 <Image
-                  src={video.snippet.thumbnails.default.url}
+                  src={
+                    video.snippet.thumbnails.maxres
+                      ? video.snippet.thumbnails.maxres.url
+                      : video.snippet.thumbnails.high.url
+                  }
                   alt={video.snippet.title}
                   width={"400px"}
                   height={"225px"}

@@ -26,7 +26,7 @@ const UserpageRecommended = () => {
       <Flex align="center" gap={2} mb={"20px"} ml={"100px"}>
         <Image src={bell} alt="bell" boxSize="20px" />
         <Button bg="red" size="sm" borderRadius={"full"}>
-          Subscribe 2.3M
+          Subscribe
         </Button>
       </Flex>
 

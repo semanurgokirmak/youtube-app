@@ -31,14 +31,27 @@ const VideoCarousel = ({
           navigation={true}
           modules={[Navigation]}
           spaceBetween={20}
-          slidesPerView={isBig ? 3 : 5}
+          breakpoints={{
+            // Büyük ekranlar
+            1024: {
+              slidesPerView: isBig ? 3 : 5,
+            },
+            // Orta ekranlar
+            768: {
+              slidesPerView: isBig ? 2 : 3,
+            },
+            // Küçük ekranlar
+            480: {
+              slidesPerView: isBig ? 1 : 2,
+            },
+          }}
         >
           {videos &&
             videos.map((video, index) => (
               <SwiperSlide key={index}>
                 <div onClick={() => onVideoClick(video.id)}>
                   <VideoCard
-                    imageSrc={video.snippet.thumbnails.standard.url}
+                    imageSrc={video.snippet.thumbnails.standard?.url}
                     title={video.snippet.title}
                     date={video.snippet.publishedAt}
                     duration={video.contentDetails.duration}
