@@ -11,6 +11,7 @@ const HomePage = () => {
   const [recommendedData, setRecommendedData] = useState<Array<Video>>([]);
   const [foodAndDrinkData, setFoodAndDrinkData] = useState<Array<Video>>([]);
   const navigate = useNavigate();
+  const apiKey = "[YOUR_API_KEY]";
 
   const fetchData = useCallback(async () => {
     try {
@@ -22,7 +23,7 @@ const HomePage = () => {
             chart: "mostPopular",
             regionCode: "US",
             maxResults: 20,
-            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+            key: apiKey,
           },
         }
       );
@@ -42,7 +43,7 @@ const HomePage = () => {
             chart: "mostPopular",
             regionCode: "TR",
             maxResults: 30,
-            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+            key: apiKey,
           },
         }
       );
@@ -62,7 +63,7 @@ const HomePage = () => {
             chart: "mostPopular",
             regionCode: "DE",
             maxResults: 20,
-            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+            key: apiKey,
           },
         }
       );

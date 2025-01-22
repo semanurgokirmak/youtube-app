@@ -13,6 +13,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import useSidebarStore from "../store/SidebarStore";
 
+// API Key dışarıdan bir değişken olarak tanımlandı
+const apiKey = "[YOUR_API_KEY]";
+
 const VideoDetails = () => {
   const { isSidebarOpen } = useSidebarStore();
   const { videoId } = useParams<{ videoId: string }>();
@@ -35,7 +38,7 @@ const VideoDetails = () => {
             params: {
               part: "snippet,statistics",
               id: videoId,
-              key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+              key: apiKey,
             },
           }
         );

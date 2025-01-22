@@ -8,12 +8,12 @@ const SearchResultsPage: React.FC = () => {
   const { search } = useLocation();
   const query = new URLSearchParams(search).get("query") || "";
   const navigate = useNavigate();
-
+  const apiKey = "[YOUR_API_KEY]";
   useEffect(() => {
     const fetchVideos = async () => {
       try {
         const response = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&key=AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&key=${apiKey}`
         );
         const data = await response.json();
         setVideos(data.items);

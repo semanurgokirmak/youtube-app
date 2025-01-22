@@ -17,6 +17,9 @@ const VideoPlayer = () => {
     viewCount: "",
   });
 
+  // API anahtarını sabit olarak tanımlıyoruz.
+  const apiKey = "[YOUR_API_KEY]";
+
   useEffect(() => {
     const fetchVideoData = async () => {
       try {
@@ -26,7 +29,7 @@ const VideoPlayer = () => {
             params: {
               part: "snippet,statistics",
               id: videoId,
-              key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+              key: apiKey,
             },
           }
         );
@@ -36,24 +39,26 @@ const VideoPlayer = () => {
           viewCount: video.statistics.viewCount,
         });
       } catch (error) {
-        console.error("hataa:", error);
+        console.error("Hata:", error);
       }
     };
 
-    if (videoId) {
+    if (videoId && apiKey !== "[YOUR_API_KEY]") {
       fetchVideoData();
+    } else {
+      console.log("Lütfen geçerli bir API anahtarı ekleyin.");
     }
-  }, [videoId]);
+  }, [videoId, apiKey]);
 
   return (
     <Box mt="48px" justifyContent="flex-start" ml="30px" w="full">
       <Box
         position="relative"
         w="full"
-        pb="56.25%" // 16:9 oranını korur
+        pb="56.25%"
         borderRadius="2xl"
         overflow="hidden"
-        maxW={isSidebarOpen ? "1000px" : "900px"} // Maksimum genişlik
+        maxW={isSidebarOpen ? "1000px" : "900px"}
       >
         <ReactPlayer
           url={`https://www.youtube.com/watch?v=${videoId}`}

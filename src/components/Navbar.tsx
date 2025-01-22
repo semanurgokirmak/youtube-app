@@ -10,10 +10,10 @@ import Userpic from "../Assets/Userpic.svg";
 import icon1 from "../Assets/icon1.svg";
 import icon2 from "../Assets/icon2.svg";
 import icon3 from "../Assets/icon3.svg";
-import searchIcon from "../Assets/search.svg"; // Search görselini içe aktar
-import { useAuth } from "../components/AuthContext"; // useAuth'i içe aktarın
+import searchIcon from "../Assets/search.svg";
+import { useAuth } from "../components/AuthContext";
 import LoginButton from "./LoginButton";
-import { useTheme } from "next-themes"; // Tema kontrolü için içeri aktarın
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const toggleSidebar = useSidebarStore((state) => state.toggleSidebar);
@@ -48,7 +48,7 @@ const Navbar = () => {
   const { theme } = useTheme();
 
   const iconStyle = {
-    filter: theme === "dark" ? "invert(1)" : "none", // Dark mode'da ikonların rengini beyaz yapmak için 'invert' kullandık
+    filter: theme === "dark" ? "invert(1)" : "none",
   };
 
   return (
@@ -83,21 +83,21 @@ const Navbar = () => {
             alt="Notification Icon"
             boxSize="20px"
             objectFit="contain"
-            style={iconStyle} // Tema göre renk filtresi ekledik
+            style={iconStyle}
           />
           <Image
             src={icon2}
             alt="Settings Icon"
             boxSize="20px"
             objectFit="contain"
-            style={iconStyle} // Tema göre renk filtresi ekledik
+            style={iconStyle}
           />
           <Image
             src={icon1}
             alt="Messages Icon"
             boxSize="20px"
             objectFit="contain"
-            style={iconStyle} // Tema göre renk filtresi ekledik
+            style={iconStyle}
           />
         </>
 
@@ -113,7 +113,7 @@ const Navbar = () => {
                 objectFit="contain"
                 cursor="pointer"
                 title="Search"
-                style={iconStyle} // Tema göre renk filtresi ekledik
+                style={iconStyle}
               />
             </Box>
 

@@ -15,6 +15,7 @@ const UserPage = () => {
   );
   const { setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const apiKey = "[YOUR_API_KEY]";
 
   const fetchChannelData = useCallback(async () => {
     try {
@@ -24,7 +25,7 @@ const UserPage = () => {
           params: {
             part: "snippet,contentDetails",
             mine: "true",
-            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+            key: apiKey,
           },
         }
       );
@@ -44,7 +45,7 @@ const UserPage = () => {
             part: "snippet,contentDetails",
             channelId: channelId,
             maxResults: 20,
-            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+            key: apiKey,
           },
         }
       );

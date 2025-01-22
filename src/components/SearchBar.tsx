@@ -3,6 +3,9 @@ import { Box, Input, Text, useBreakpointValue } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "next-themes";
 
+// API Key dışarıdan bir değişken olarak tanımlandı
+const apiKey = "[YOUR_API_KEY]";
+
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [videos, setVideos] = useState<any[]>([]);
@@ -18,9 +21,15 @@ const SearchBar = () => {
       setVideos([]);
       return;
     }
+
+    if (!apiKey) {
+      console.error("API key bulunamadı!");
+      return;
+    }
+
     try {
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${query}&key=AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${query}&key=${apiKey}`
       );
       const data = await response.json();
       setVideos(data.items);
@@ -30,14 +39,14 @@ const SearchBar = () => {
   };
 
   const handleVideoClick = (query: string) => {
-    setSearchTerm(""); // Başlık tıklandığında arama kutusunu temizle
+    setSearchTerm("");
     navigate(`/search-results?query=${query}`);
-    setVideos([]); // Pencereyi kapat
+    setVideos([]);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      setVideos([]); // Enter'a basınca da pencereyi kapat
+      setVideos([]);
     }
   };
 
@@ -46,7 +55,7 @@ const SearchBar = () => {
       searchBarRef.current &&
       !searchBarRef.current.contains(event.target as Node)
     ) {
-      setVideos([]); // Arama dışına tıklandığında da pencereyi kapat
+      setVideos([]);
     }
   };
 
@@ -115,7 +124,7 @@ const SearchBar = () => {
                   fontWeight="bold"
                   color={theme === "light" ? "#1A202C" : "#E2E8F0"}
                   cursor="pointer"
-                  onClick={() => handleVideoClick(video.snippet.title)} // Başlık tıklandığında arama kutusunu temizle
+                  onClick={() => handleVideoClick(video.snippet.title)}
                 >
                   {video.snippet.title}
                 </Text>

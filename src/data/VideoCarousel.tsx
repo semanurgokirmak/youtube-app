@@ -32,15 +32,14 @@ const VideoCarousel = ({
           modules={[Navigation]}
           spaceBetween={20}
           breakpoints={{
-            // Büyük ekranlar
             1024: {
               slidesPerView: isBig ? 3 : 5,
             },
-            // Orta ekranlar
+
             768: {
               slidesPerView: isBig ? 2 : 3,
             },
-            // Küçük ekranlar
+
             480: {
               slidesPerView: isBig ? 1 : 2,
             },

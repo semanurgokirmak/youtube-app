@@ -3,10 +3,18 @@ import { Box, Image, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+// API Key dışarıdan bir değişken olarak tanımlandı
+const apiKey = "[YOUR_API_KEY]";
+
 export default function RightVideos() {
   const [videos, setVideos] = useState<Array<any>>([]);
 
   const fetchVideos = useCallback(async () => {
+    if (!apiKey) {
+      console.error("API key bulunamadı!");
+      return;
+    }
+
     try {
       const response = await axios.get(
         "https://youtube.googleapis.com/youtube/v3/videos",
@@ -16,13 +24,13 @@ export default function RightVideos() {
             chart: "mostPopular",
             regionCode: "TR",
             maxResults: 10,
-            key: "AIzaSyCGcjquom4qj-y37zCvZbJwzq3MOY1ODRQ",
+            key: apiKey,
           },
         }
       );
       setVideos(response.data.items);
     } catch (error) {
-      console.error(error);
+      console.error("Video fetch hatası:", error);
     }
   }, []);
 
